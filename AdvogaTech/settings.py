@@ -41,12 +41,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+     #required allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     
 ]
 
-MYAPPS = ['authentication',]
+SITE_ID = 1
+
+MYAPPS = ['authentication', ]
 
 INSTALLED_APPS += MYAPPS
+
+LOGIN_REDIRECT_URL = 'authentication:register'
+
+# LOGOUT_REDIRECT_URL = 'authentication:register'
 
 
 MIDDLEWARE = [
@@ -57,7 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+   
+]   
 
 ROOT_URLCONF = 'AdvogaTech.urls'
 
@@ -77,6 +90,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'AdvogaTech.wsgi.application'
 
 
@@ -90,6 +104,15 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -136,3 +159,4 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -24,7 +24,7 @@
                
             </div>
             <div class="col-md-8 d-flex">
-                <div id="register-container"  class="px-0 py-2 align-self-center mx-auto col-md-6 ">
+                <div id="register-container"  class="px-0 mt-5 py-2 align-self-center mx-auto col-md-6 ">
                 
                     <h1 id="title-create-account">Create Account</h1>
                     <p class="px-2">Enter personal information to continue</p>
@@ -35,19 +35,15 @@
                                 <div class="col-md-6 px-2 ">
                                     
                                     <label for="firstname">First name</label>
-                                    <div class="float-right mt-1">
-                                        <p class="invalid-field">First name must be valid!</p>
-                                    </div>
-                                    <input id="firstname"  class=" pb-2 register-input form-control pb-2 " placeholder="First name" type="text">
+                                   
+                                    <input id="firstname"  class=" pb-2 register-input form-control pb-2 input-names " placeholder="First name" type="text">
                                    
                                 </div>
                                 <div class="col-md-6 px-2 ">
                                    
                                     <label for="lastname">Last name</label>
-                                    <div class="float-right mt-1">
-                                        <p class="invalid-field">Last name must be valid!</p>
-                                    </div>
-                                    <input    class="register-input form-control pb-2 " placeholder="Last name" id="lastname" type="text">
+                                 
+                                    <input    class="register-input form-control pb-2 input-names " placeholder="Last name" id="lastname" type="text">
                                     
                                 </div>
                             </div>
@@ -58,29 +54,20 @@
                                 <div class="col-md-12">
                                     
                                     <label for="email-address">Email address</label>
-                                    <div class="float-right mt-1">
-                                        <p class="invalid-field">
-                                            Email must be valid!</p>
-                                    </div>
-                                    <input placeholder="Email address" id="email-address" class="form-control pb-2"  type="email" >
+                                  
+                                    <input placeholder="Email address" id="email-address" class="form-control pb-2 email-address"  type="email" >
                                 </div>
                                 <div class="col-md-12">
                                     
                                     <label for="password">Password</label>
-                                    <div class="float-right mt-1">
-                                        <p class="invalid-field">
-                                            Password must be valid!</p>
-                                    </div>
-                                    <input placeholder="Enter your password" id="password" class="form-control pb-2"  type="email" >
+                                   
+                                    <input placeholder="Enter your password" id="password" class="form-control pb-2 input-passwords"  type="email" >
                                 </div>
                                 <div class="col-md-12">
                                     
                                     <label for="password-2">Password again</label>
-                                    <div class="float-right mt-1">
-                                        <p class="invalid-field">
-                                            Password must be valid!</p>
-                                    </div>
-                                    <input  placeholder="Enter your password again"  id="password-2" class="form-control pb-2"  type="email" >
+                                   
+                                    <input  placeholder="Enter your password again"  id="password-2" class="form-control pb-2 input-passwords"  type="email" >
                                 </div>
 
                                 <div class="col-md-12 mt-2">
@@ -100,6 +87,29 @@
                                     
                                 
                                 </div>
+                                <div class="col-md-12 mt-4 d-flex justify-content-center">
+                                    
+                                    <p class="">Or</p>
+                                
+                                </div>
+
+                                <div class="col-md-12 mt-0">
+                                    
+                                    <button class="button-login my-3">
+                                        <img class="button-login-img"  src="{% static 'img/facebook.png'%}" alt="">
+                                        <span>Signup with Facebook</span>
+                                    </button>
+                                    <button class="button-login my-3">
+                                        <img class="button-login-img" src="{% static 'img/google.png'%}" alt="">
+                                        <span>Signup with Google</span>
+                                        
+                                    </button>
+                                    
+                                </div>
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <p class="">Already have an account? <span><a class="link-login" href="">Login</a></span></p>
+                                </div>
+                                
                                 
                                 
                                 

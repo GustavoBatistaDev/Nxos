@@ -54,4 +54,30 @@ input::placeholder{
     transition: ease-in-out 1s;
     background-color:#2a2a3b;
 }
+
+.button-login{
+    border-radius: 5px ;
+    border-color: none;
+    border: none;
+    background-color: #f4f0f0;
+    width: 100%;
+    padding: 0.625rem 1rem;
+
+
+}
+
+.link-login{
+
+    color: #8282ce;
+}
+
+.link-login:hover{
+
+    color: #2c2c44;
+}
+.button-login-img{
+    height: 20px;
+    width: 20px;
+    margin-right: 13px;
+}
 /* end register page*/
