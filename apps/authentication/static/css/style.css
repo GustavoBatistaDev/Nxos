@@ -80,4 +80,9 @@ input::placeholder{
     width: 20px;
     margin-right: 13px;
 }
+
+.help-text{
+    color: black;
+    font-size: 70%;
+}
 /* end register page*/

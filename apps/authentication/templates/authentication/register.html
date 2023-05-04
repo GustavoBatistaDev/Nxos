@@ -1,8 +1,10 @@
 {% load static %}
+{% load socialaccount %}
+ 
 
 <!doctype html>
 <html lang="en">
-  <head>
+  <head> 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <link rel="shortcut icon" href="{% static 'img/office.png'%}" type="image/x-icon">
@@ -10,67 +12,48 @@
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
     <title>AdvogaTech</title>
   </head>
   <body>
-
     <div class=" p-0 container-fluid">
         <div class="row">
             <div class="col-md-4">
                 <div class="container-image">
                     <img id="main-image" class="img-fluid" src="{% static 'img/office.png'%}" alt="">
-                    
                 </div>
-               
             </div>
             <div class="col-md-8 d-flex mt-5">
                 <div id="register-container"  class="px-0 mt-5 py-2 align-self-center mx-auto col-md-6 ">
-                
                     <h1 id="title-create-account">Create Account</h1>
                     <p class="px-2">Enter personal information to continue</p>
-                    
                     <form action="" method="post" class="register-form">{% csrf_token %}
                         <div  id="container-input-1" class="container px-0 ">
                             <div class="row mx-auto">
                                 <div class="col-md-6 px-2 ">
-                                    
                                     <label for="firstname">First name</label>
-                                   
                                     <input id="firstname"  class=" pb-2 register-input form-control pb-2 input-names " placeholder="First name" type="text">
-                                   
                                 </div>
                                 <div class="col-md-6 px-2 ">
-                                   
                                     <label for="lastname">Last name</label>
-                                 
                                     <input    class="register-input form-control pb-2 input-names " placeholder="Last name" id="lastname" type="text">
-                                    
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="container px-2 my-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    
                                     <label for="email-address">Email address</label>
-                                  
                                     <input placeholder="Email address" id="email-address" class="form-control pb-2 email-address"  type="email" >
                                 </div>
                                 <div class="col-md-12">
-                                    
                                     <label for="password">Password</label>
-                                   
                                     <input placeholder="Enter your password" id="password" class="form-control pb-2 input-passwords"  type="password" >
+                                        <p  class="help-text float-right m-0">Password must be more than 8 characters</p>
                                 </div>
                                 <div class="col-md-12">
-                                    
                                     <label for="password-2">Password again</label>
-                                   
                                     <input  placeholder="Enter your password again"  id="password-2" class="form-control pb-2 input-passwords"  type="password" >
                                 </div>
-
                                 <div class="col-md-12 mt-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox"  id="check1">
@@ -78,55 +61,43 @@
                                             Agree to terms and conditions
                                         </label>
                                       </div>
-                                    
-                                    
-                                  
                                 </div>
                                 <div class="col-md-12 mt-2">
-                                    
                                     <input id="submit-input" class="w-100 p-2 " value="Create Account" type="submit">
-                                    
-                                
                                 </div>
                                 <div class="col-md-12 mt-4 d-flex justify-content-center">
-                                    
                                     <p class="">Or</p>
-                                
                                 </div>
-
                                 <div class="col-md-12 mt-0">
-                                    
                                     <button class="button-login my-3">
-                                        <img class="button-login-img"  src="{% static 'img/facebook.png'%}" alt="">
+                                       <a href="">
+                                        <img class="button-login-img "  src="{% static 'img/facebook.png'%}" alt="">
                                         <span>Signup with Facebook</span>
+                                       </a>
                                     </button>
-                                    <button class="button-login my-3">
-                                        <img class="button-login-img" src="{% static 'img/google.png'%}" alt="">
-                                        <span>Signup with Google</span>
-                                        
-                                    </button>
-                                    
+                                    <a href="{% provider_login_url 'google' %} ">
+                                        <button class="button-login my-3">
+                                         
+                                            <img class="button-login-img " src="{% static 'img/google.png'%}" alt="">
+                                            <a href="{% provider_login_url 'google' %}">
+                                                Signup with Google
+                                            </a>
+                                        </button>
+                                    </a>
                                 </div>
+                               
+                                  
+
                                 <div class="col-md-12 d-flex justify-content-center">
                                     <p class="">Already have an account? <span><a class="link-login" href="">Login</a></span></p>
                                 </div>
-                                
-                                
-                                
-                                
                             </div>
                         </div>
                     </form>
-                        
-                   
                 </div>
             </div>
         </div>
     </div>
-   
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="{% static 'js/script.js'%}"></script>

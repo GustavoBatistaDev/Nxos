@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=PT+Sans&display=swap');
+
+/*register page*/
+
+:root{
+    --cor-paleta-1: #3a3952;;
+}
+*{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+body{
+ 
+    background-color: #f2f2f998 !important;
+}
+
+#continue{
+    padding: 10px 20px;
+    width: 100%;
+    border-style: none;
+    outline: none;
+    background-color: var(--cor-paleta-1);
+    color: white;
+    border-radius: 3px;
+}

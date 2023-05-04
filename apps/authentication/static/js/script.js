@@ -3,7 +3,7 @@
     $('.input-names').on('input', function() {
       // aqui você pode inserir a lógica de validação dos campos
       // por exemplo:
-      if ($(this).val().length < 2) {
+      if ($(this).val().length < 3) {
         $(this).addClass('is-invalid');
       } else {
         $(this).removeClass('is-invalid');
@@ -12,7 +12,6 @@
     });
   });
 
-  
   $(document).ready(function() {
     // Seleciona as caixas de senha
     var senha1 = $('#password');
@@ -20,18 +19,15 @@
   
     // Função que valida as senhas
     function validarSenha() {
-      if (senha1.val() === senha2.val()) {
+      if (senha1.val() === senha2.val() ) {
         // As senhas são iguais
-        senha1.addClass('is-valid');
+        senha2.removeClass('is-invalid');
         senha2.addClass('is-valid');
+        senha1.addClass('is-valid');
       } else {
         // As senhas são diferentes
-        senha1.removeClass('is-valid');
-        senha2.removeClass('is-valid');
-
-        senha1.addClass('is-invalid');
         senha2.addClass('is-invalid');
-        
+        senha1.addClass('is-valid');
       }
     }
   
@@ -39,7 +35,6 @@
     senha1.on('input', validarSenha);
     senha2.on('input', validarSenha);
   });
-
 
 //|| 
 

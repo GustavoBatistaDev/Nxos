@@ -56,7 +56,7 @@ MYAPPS = ['authentication', ]
 
 INSTALLED_APPS += MYAPPS
 
-LOGIN_REDIRECT_URL = 'authentication:register'
+LOGIN_REDIRECT_URL = 'authentication:dashboard'
 
 # LOGOUT_REDIRECT_URL = 'authentication:register'
 
@@ -113,6 +113,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     
 ]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
