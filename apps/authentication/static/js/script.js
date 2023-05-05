@@ -38,6 +38,13 @@
 
 //|| 
 
+let divClose = $('.close').click(function(){
+  let containerMessage = $('.container-message')
+  containerMessage.remove();
+})
+  
+
+
 
 })();
 

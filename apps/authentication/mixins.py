@@ -1,11 +1,14 @@
 from django.http import HttpRequest
+from django.shortcuts import redirect
+from typing import Type
+import re
 
 
 class DataClient:
 
   
     @classmethod
-    def get_data(cls, request: HttpRequest, **kwargs):
+    def get_data(cls, request: HttpRequest, **kwargs) -> dict:
         data = {}
         first_name = request.POST.get('first_name') or ''
         last_name = request.POST.get('last_name') or ''
@@ -35,11 +38,24 @@ class DataClient:
     
 
     @classmethod
-    def validate_password(cls, data: dict):
+    def validate_password(cls, data: dict) -> bool:
         password1 = data['password']
         password2 = data['password2']
-        strong_password = True if len(password1) >= 8 and password1 == password2 else False
+        standard = r'^(?=.*[a-z])(?=.*[A-Z]).+$'
+        strong_password = True if len(password1) >= 8 and password1 == password2 and re.match(standard, password1) else False
         return strong_password
+    
+    @classmethod
+    def redirect_client(cls, url: str) -> Type[redirect]:
+        return redirect(url)
+    
+    @classmethod
+    def validate_names(cls, request: HttpRequest) -> bool:
+        data = cls.get_data(request)
+        standard = r'^[a-zA-Z]+$'
+        names_is_valid = True if re.match(standard, data['first_name']) and re.match(standard, data['last_name']) else False
+        return names_is_valid
+
         
 
 

@@ -15,6 +15,8 @@ body{
 
     --error-clr: #ef4d61;
     --error-bg-clr: #fdedef;
+    --cor-paleta-1: #3a3952;
+    --success-clr: #35d39d;
 }
 
 #main-image{
@@ -160,3 +162,39 @@ input::placeholder{
   .alert_wrapper .alert_item.error_item .icon {
     background: var(--error-clr);
   }
+
+  #notification{
+   margin-left: 820px;
+  }
+
+  .close{
+    cursor: pointer !important;
+  }
+
+  .alert_wrapper .alert_item.success_item {
+    background: var(--success-bg-clr);
+  }
+
+  .alert_wrapper.alert_wrapper_3 .alert_item.success_item {
+    border: 2px solid var(--success-clr);
+  }
+
+
+
+
+.alert_wrapper .alert_item.success_item .icon {
+  background: var(--success-clr);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
