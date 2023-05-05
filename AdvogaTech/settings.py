@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+   
      #required allauth
     'allauth',
     'allauth.account',
@@ -139,11 +140,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
+
 TIME_ZONE = 'America/Bahia'
 
 USE_I18N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'authentication.UserCustom'
+
+AUTHENTICATION_BACKENDS = ('authentication.backends.CustomBackend',)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -153,7 +159,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
      Path(BASE_DIR, 'static'),
 )
-   
+MEDIA_ROOT = Path(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 # Default primary key field type

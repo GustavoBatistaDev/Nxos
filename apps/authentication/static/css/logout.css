@@ -18,17 +18,29 @@ body{
     background-color: #f2f2f998 !important;
 }
 
-#continue{
+
+
+#logout{
     padding: 10px 20px;
     width: 100%;
     border-style: none;
     outline: none;
-    background-color: var(--cor-paleta-1);
+    background-color: #28283a;
+    color: white;
+    border-radius: 3px;
+}
+#logout:hover{
+    padding: 10px 20px;
+    width: 100%;
+    border-style: none;
+    outline: none;
+    background-color: #1c1c29;
     color: white;
     border-radius: 3px;
 }
 
-.confirm-logout{
+
+.sign-out{
     border-radius: 5px;
     background-color: #3a3952 !important ;
  }
