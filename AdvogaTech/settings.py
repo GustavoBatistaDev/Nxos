@@ -57,7 +57,7 @@ MYAPPS = ['authentication', ]
 
 INSTALLED_APPS += MYAPPS
 
-LOGIN_REDIRECT_URL = 'authentication:dashboard'
+LOGIN_REDIRECT_URL = 'authentication:register'
 
 # LOGOUT_REDIRECT_URL = 'authentication:register'
 

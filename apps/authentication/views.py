@@ -3,6 +3,8 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from .mixins import DataClient
+from django.contrib import messages
+from django.contrib.messages import constants
 
 
 class Register(View):
@@ -15,6 +17,8 @@ class Register(View):
             validate_password = DataClient.validate_password(validate_data)
             if validate_password:
                 return HttpResponse('pode salvar no banco')
+            
+            messages.add_message(request, messages.ERROR, 'Invalid password.')
             return redirect('authentication:register')
 
         else:
