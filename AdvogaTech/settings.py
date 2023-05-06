@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os 
 import sys
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,10 +25,10 @@ sys.path.insert(0, os.path.join(PRJECT_ROOT, '../apps'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6*ok(li+hu^&o-&27c_$=x4*iz=d5i=$0m!l@3-w96&na20eew'
+SECRET_KEY = config('SECRETY_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool, default=True)
 
 ALLOWED_HOSTS = []
 
@@ -57,7 +58,7 @@ MYAPPS = ['authentication', ]
 
 INSTALLED_APPS += MYAPPS
 
-LOGIN_REDIRECT_URL = 'authentication:register'
+LOGIN_REDIRECT_URL = 'authentication:login'
 
 LOGOUT_REDIRECT_URL = 'authentication:login'
 
@@ -167,4 +168,13 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#email  
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'peeeepslow@gmail.com'
+EMAIL_HOST_PASSWORD = 'qpzbbfsrhhkxtcux'
+
 

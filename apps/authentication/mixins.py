@@ -2,9 +2,10 @@ from django.http import HttpRequest
 from django.shortcuts import redirect
 from typing import Type
 import re
+from django.core.mail import send_mail
 
 
-class DataClient:
+class ValidatorMixin:
 
   
     @classmethod
@@ -52,9 +53,18 @@ class DataClient:
     @classmethod
     def validate_names(cls, request: HttpRequest) -> bool:
         data = cls.get_data(request)
-        standard = r'^[a-zA-Z]+$'
-        names_is_valid = True if re.match(standard, data['first_name']) and re.match(standard, data['last_name']) else False
+        standard =  r'^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ]+$'
+        names_is_valid = True if re.match(standard, data['first_name']) and re.match(standard, data['last_name'], ) else False
         return names_is_valid
+    
+    @classmethod
+    def validate_email(cls, request: HttpRequest) -> bool:
+        data = cls.get_data(request)
+        standard = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        email_is_valid = True if re.match(standard, data['email']) else False
+        return email_is_valid
+
+
 
         
 
