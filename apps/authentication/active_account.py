@@ -23,13 +23,12 @@ class ActiveAccount:
         uid = urlsafe_base64_encode(force_bytes(self._user.pk))
         token = default_token_generator.make_token(self._user)
 
-        print(f"{protocol}://{domain}{reverse('active_account', kwargs={'uidb4': uid, 'token':token})}")
-        return f"{protocol}://{domain}{reverse('active_account', kwargs={'uidb4': uid, 'token':token})}"
+        print(f"{protocol}://{domain}{reverse('authentication:active_account', kwargs={'uidb4': uid, 'token':token})}")
+        return f"{protocol}://{domain}{reverse('authentication:active_account', kwargs={'uidb4': uid, 'token':token})}"
 
     def active_account_send_mail(self):
         active_url = self._generate_url()
         subject = 'Hello, Friend! Active your account now.' 
-
         path_templates_email = os.path.join(settings.BASE_DIR, 'apps/authentication/templates/emails/active_account.html')
         email_body = render_to_string(path_templates_email, {'active_url':active_url})
         email = EmailMessage(subject, email_body, to=[self._user.email])

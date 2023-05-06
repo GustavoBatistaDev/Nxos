@@ -21,6 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PRJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PRJECT_ROOT, '../apps'))
 
+DOMAIN = config('DOMAIN')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 

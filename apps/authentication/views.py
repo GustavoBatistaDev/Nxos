@@ -82,9 +82,9 @@ def active_account(request: HttpResponse, uidb4, token) -> HttpResponse:
         auth_login(request, user)
 
         messages.add_message(request, messages.SUCCESS, 'Your account has been saved successfully' ) 
-        return redirect(reverse('login'))
+        return redirect(reverse('authentication:login'))
 
     else:
         messages.add_message(request, messages.ERROR, 'The url accessed is not valid' ) 
-        return redirect(reverse('register'))
+        return redirect(reverse('authentication:register'))
     
