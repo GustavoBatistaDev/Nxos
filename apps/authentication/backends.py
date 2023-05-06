@@ -12,7 +12,7 @@ class CustomBackend(ModelBackend):
             return
         if user.exists():
             my_user = user.first()
-            if my_user.check_password(password):
+            if my_user.password == password:
                 return my_user
             return 
         else:

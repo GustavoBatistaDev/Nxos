@@ -12,6 +12,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse
 from django.contrib.auth import login as auth_login,logout
 from .active_account import ActiveAccount
+from typing import Type
+from django.contrib.auth import authenticate, login, logout
 
 
 class RegisterView(View):
@@ -63,28 +65,81 @@ class RegisterView(View):
 
 
 class LoginView(View):
-    def get(self, request: HttpRequest, **kwargs ) -> HttpResponse:
-     
+    def get(self, request: HttpRequest, **kwargs ) -> HttpResponse: 
         return render(request, 'authentication/login.html')
-
-
-def active_account(request: HttpResponse, uidb4, token) -> HttpResponse:
-
-    User = get_user_model()
-    uid = force_str(urlsafe_base64_decode(uidb4))
-
-    user = User.objects.filter(pk=uid)
-
-    if (user := user.first()) and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-
-        auth_login(request, user)
-
-        messages.add_message(request, messages.SUCCESS, 'Your account has been saved successfully' ) 
-        return redirect(reverse('authentication:login'))
-
-    else:
-        messages.add_message(request, messages.ERROR, 'The url accessed is not valid' ) 
-        return redirect(reverse('authentication:register'))
     
+
+    def post(self, request: HttpRequest) -> HttpResponse:
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '').strip()
+        password_encode = urlsafe_base64_encode(force_bytes(password))
+     
+        user = authenticate(username=email, password=password_encode)
+        if user is not None:
+            login(request, user)
+            return redirect('authentication:home')
+        else:
+            return render(request, 'login.html', {'error': 'Usuário ou senha inválidos.'})
+      
+      
+        print(user)
+        if user is not None:
+            login(request, user)
+            return redirect('authentication:home')
+        else:
+            messages.add_message(request, messages.ERROR, 'Invalid email or password!')
+            return render(request, 'authentication/login.html', context={
+                'email':email,
+                'password': password
+            })
+
+
+
+class ActiveAccountView(View):
+    def get(self, request: HttpResponse, uidb4, token)  -> Type[redirect]:
+
+        User = get_user_model()
+        uid = force_str(urlsafe_base64_decode(uidb4))
+
+        user = User.objects.filter(pk=uid)
+
+        if (user := user.first()) and default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+
+            auth_login(request, user)
+
+            messages.add_message(request, messages.SUCCESS, 'Your account has been saved successfully' ) 
+            return redirect(reverse('authentication:login'))
+
+        else:
+            messages.add_message(request, messages.ERROR, 'The url accessed is not valid' ) 
+            return redirect(reverse('authentication:register'))
+        
+
+class ActiveAccountView(View):
+    def get(self, request: HttpResponse, uidb4, token) -> HttpResponse:
+
+        User = get_user_model()
+        uid = force_str(urlsafe_base64_decode(uidb4))
+
+        user = User.objects.filter(pk=uid)
+
+        if (user := user.first()) and default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+
+            auth_login(request, user)
+
+            messages.add_message(request, messages.SUCCESS, 'Your account has been saved successfully' ) 
+            return redirect(reverse('authentication:login'))
+
+        else:
+            messages.add_message(request, messages.ERROR, 'The url accessed is not valid' ) 
+            return redirect(reverse('authentication:register'))
+
+
+@login_required(login_url='authentication:login')
+def home(request):
+    return HttpResponse('dashboard')
+
