@@ -56,12 +56,12 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-MYAPPS = ['authentication', ]
+MYAPPS = ['authentication', 'dashboard']
 
 INSTALLED_APPS += MYAPPS
 
-LOGIN_REDIRECT_URL = 'authentication:login'
-
+LOGIN_REDIRECT_URL = 'dashboard:dashboard'
+LOGIN_URL = '/auth/login/'
 LOGOUT_REDIRECT_URL = 'authentication:login'
 
 

@@ -6,6 +6,7 @@
     --cor-paleta-1: #3a3952;;
 }
 *{
+    color: white;
     overflow-x: hidden;
     overflow-y: hidden;
     box-sizing: border-box;
@@ -15,32 +16,22 @@
 
 body{
  
-    background-color: #f2f2f998 !important;
+    background: rgb(44, 47, 59);
+  background: -webkit-linear-gradient(to right, var(--main-color-dark), rgb(54, 60, 70), rgb(32, 32, 43));
+  background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
 }
 
-
-
-#logout{
+#continue{
     padding: 10px 20px;
     width: 100%;
     border-style: none;
     outline: none;
-    background-color: #28283a;
-    color: white;
-    border-radius: 3px;
-}
-#logout:hover{
-    padding: 10px 20px;
-    width: 100%;
-    border-style: none;
-    outline: none;
-    background-color: #1c1c29;
+    background-color: var(--cor-paleta-1);
     color: white;
     border-radius: 3px;
 }
 
-
-.sign-out{
+.confirm-logout{
     border-radius: 5px;
     background-color: #3a3952 !important ;
  }

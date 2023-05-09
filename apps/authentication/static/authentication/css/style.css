@@ -1,16 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=PT+Sans&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 /*register page*/
 *{
+
     overflow-x: hidden;
+    overflow-y: hidden;
     box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif !important;
+    font-family: "Poppins", sans-serif !important;
 }
 
-body{
-    background-color: #f2f2f998 !important;
+body,html{
+
+  color: white;
+  font-family: "Poppins", sans-serif !important;
+  height: 100vh;
+  margin: 0;
+  background: rgb(44, 47, 59);
+  background: -webkit-linear-gradient(to right, var(--main-color-dark), rgb(54, 60, 70), rgb(32, 32, 43));
+  background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
 }
+
+body h1, p, span, label{
+  color: white !important;
+}
+
 :root{
 
     --error-clr: #ef4d61;
@@ -19,10 +33,17 @@ body{
     --success-clr: #35d39d;
 }
 
+h1{
+  overflow-y: hidden;
+}
+
 #main-image{
-    height: 100vh;
-    object-fit: cover;
-    object-position: 40% 30% ; 
+  height: 100vh;
+  object-fit: cover;
+  object-position: 50% 40% ; 
+}
+#name-logo{
+  margin-left: 40px;
 }
 
 #register-container h1{
@@ -64,11 +85,16 @@ input::placeholder{
     border-radius: 5px ;
     border-color: none;
     border: none;
-    background-color: #f4f0f0;
+    background: -webkit-linear-gradient(to right, var(--main-color-dark), rgb(54, 60, 70), rgb(32, 32, 43));
+    background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
     width: 100%;
     padding: 0.625rem 1rem;
 
 
+}
+
+input{
+  border-radius: 10px !important; 
 }
 
 .link-login{
@@ -76,10 +102,7 @@ input::placeholder{
     color: #8282ce;
 }
 
-.link-login:hover{
 
-    color: #2c2c44;
-}
 .button-login-img{
     height: 20px;
     width: 20px;
@@ -186,11 +209,16 @@ input::placeholder{
   background: var(--success-clr);
 }
 
+.container-message p {
+
+  color: black !important;
+}
 
 
-
-
-
+.alert_item.error_item{
+  overflow-x: hidden !important; 
+  
+}
 
 
 
