@@ -1,5 +1,5 @@
 // Chave de API do OpenAI
-const apiKey = 'sua_api_key'
+const apiKey = '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'
 $("#messageArea").on("submit", function(e){
     e.preventDefault();
 
@@ -8,6 +8,7 @@ $("#messageArea").on("submit", function(e){
 					const minute = date.getMinutes();
 					const str_time = hour+":"+minute;
 					var rawText = $("#message-input").val();
+                    var rawTextInput = $("#message-input")
 					
 					$("#message-input").val("");
                     var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + 
@@ -35,17 +36,17 @@ $("#messageArea").on("submit", function(e){
 						$("#messageFormeight").append($.parseHTML(botHtml));
                       
                     })
+                    .catch((e) => {
+                        console.log(`Error -> ${e}`)
+                        
+                    })
+                    .finally(() => {
+                       
+                        rawTextInput.disabled = false
+                        rawTextInput.value = ''
+                    })
                    
-                   
-					});
-					
-
-
-
-              
-
-
-
+					});					
 
 // <!--
 // <div class="">

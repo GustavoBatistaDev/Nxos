@@ -1,0 +1,65 @@
+{% extends 'dashboard/base_dashboard.html'%}
+
+{% block 'main'%}
+
+    <form class="text-white" action="{% url 'dashboard:profile'%}" method="POST">{% csrf_token %}
+       
+            <div  id="container-input-1" class="container px-0 ">
+                <div style="width: 50%;" class="row mx-auto">
+                    <div class="col-md-12  ">
+                        <label for="firstname">First name</label>
+                        <input value="{{request.user.first_name}}" id="firstname" name="first_name"  class=" pb-2 register-input form-control pb-2 input-names " placeholder="First name" type="text">
+                    </div>
+                    <div class="col-md-12  ">
+                        <label for="lastname">Last name</label>
+                        <input value="{{request.user.last_name}}" name="last_name"    class="register-input form-control pb-2 input-names " placeholder="Last name" id="lastname" type="text">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="password">Full Name</label>
+                        <input value="{{request.user.fullname}}" name="fullname" placeholder="Enter your full name..." class="form-control pb-2 "  type="text" >
+                           
+                    </div>
+                     
+                    <div class="col-md-12">
+                        <label for="email-address">Email address</label>
+                        <input value="{{request.user.email}}"  placeholder="Email address" name="email_address" id="email-address" class="form-control pb-2 email-address"  type="email" >
+                    </div>
+                   
+                    <div class="col-md-12">
+                        <label for="mobile">Mobile</label>
+                        <input value="{{request.user.mobile}}"   name="mobile" placeholder="Enter your mobile"  id="mobile" class="form-control mb-1 pb-2 "  type="number" >
+                    </div>
+                    <div class="col-md-12">
+                        <label for="mobile">Address</label>
+                        <input value="{{request.user.address}}"  name="address" placeholder="Enter your address"  id="address" class="form-control mb-1 pb-2 "  type="text" >
+                    </div>
+                    
+                    <div class="col-md-12 ">
+                        <input id="submit-input" class="w-50 p-2 " value="Create Account" type="submit">
+                    </div>
+                </div>
+            </div>
+          
+            
+        
+            
+              
+           
+        
+
+
+       
+    </form>
+    
+      
+        
+          
+
+
+   
+{% endblock %}
+  
+  </body>
+  
+  </html>
+
