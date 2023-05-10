@@ -40,7 +40,7 @@ h1{
 #main-image{
   height: 100vh;
   object-fit: cover;
-  object-position: 50% 40% ; 
+  object-position: 70% 10% ; 
 }
 #name-logo{
   margin-left: 40px;
