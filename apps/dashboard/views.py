@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from authentication.mixins import ValidatorMixin
 from authentication.models import UserCustom
+from .mixins import ValidatorProfileMixin
 
 
 @method_decorator(login_required, name='dispatch')
@@ -24,21 +25,37 @@ class ProfileView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'dashboard/profile.html')
     
-    def post(self, request, *args, **kwargs):
-        data = ValidatorMixin.get_data(request=request)
+    def post(self, request: HttpRequest,  *args, **kwargs) -> HttpResponse:
+        data = ValidatorProfileMixin.get_data(request)
         user = UserCustom.objects.filter(email=data['email']).exclude(id=request.user.id)
         if user.exists():
-            messages.add_message(request, messages.ERROR, 'You cannot register with this email.')
-            return render(request, 'dashboard/profile.html')
+            messages.add_message(request, messages.ERROR, 'Try another email.')
+            return redirect('dashboard:profile')
         
-        request.user.first_name = data['first_name']
-        request.user.last_name = data['last_name']
-        request.user.fullname = data['fullname']
-        request.user.email = data['email']
-        request.user.mobile = data['mobile']
-        request.user.address = data['address']
-        request.user.save()
-        messages.add_message(request, messages.SUCCESS, 'Data updated successfully!')
+        fullname_is_valid = ValidatorProfileMixin.validate_fullname(request)
+        if fullname_is_valid:
+            email_is_valid = ValidatorProfileMixin.validate_email(request) 
+            if email_is_valid:
+                mobile_is_valid = ValidatorProfileMixin.validate_mobile(request) 
+                if mobile_is_valid:
+                    address_is_valid = ValidatorProfileMixin.validate_address(request)
+                    if address_is_valid:
+                        request.user.fullname = data['fullname']
+                        request.user.email = data['email']
+                        request.user.address = data['address']
+                        request.user.mobile = data['mobile'] 
+                        request.user.photo = data['photo'] 
+                        request.user.save()
+                        messages.add_message(request, messages.SUCCESS, 'Successfully updated')
+                        return redirect('dashboard:profile')
+                    messages.add_message(request, messages.ERROR, 'Address is invalid')
+                    return redirect('dashboard:profile')
+                    
+                messages.add_message(request, messages.ERROR, 'Mobile is invalid')
+                return redirect('dashboard:profile')
+            messages.add_message(request, messages.ERROR, 'Email is invalid')
+            return redirect('dashboard:profile')
+        messages.add_message(request, messages.ERROR, 'Fullname is invalid')
         return redirect('dashboard:profile')
 
-
+        

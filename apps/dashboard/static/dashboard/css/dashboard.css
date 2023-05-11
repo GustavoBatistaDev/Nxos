@@ -88,8 +88,17 @@ nav {
     width: 3rem;
     margin: 0 0.4rem;
     border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
   }
-  
+
+  #picture_user {
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
+    }
+
   .sidebar-top h3 {
     padding-left: 0.5rem;
     font-weight: 600;
@@ -460,9 +469,7 @@ nav {
     padding: 5px 10px;
     margin-bottom: 15px !important;
   }
-  .active{
-    background-color: rgba(0,0,0,0.3);
-  }
+
   .user_img{
     height: 70px;
     width: 70px;

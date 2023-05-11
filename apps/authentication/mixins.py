@@ -17,25 +17,20 @@ class ValidatorMixin:
         password = request.POST.get('password') or ''
         password2 = request.POST.get('password2') or ''
         terms_and_conditions = request.POST.get('terms_and_conditions') or ''
-        fullname = request.POST.get('fullname') or ''
-        mobile = request.POST.get('mobile') or ''
-        address = request.POST.get('address') or ''
-
         data['first_name'] = first_name
         data['last_name'] = last_name
         data['email'] = email
         data['password'] = password
         data['password2'] = password2
         data['terms_and_conditions'] = terms_and_conditions
-        data['fullname'] = fullname
-        data['mobile'] = mobile
-        data['address'] = address
+       
         return data
     
 
     @classmethod
     def validate_data_is_empty(cls, request: HttpRequest) -> bool:
         data = cls.get_data(request)
+        print(data)
         for i in data.values():
             match i:
                 case '':

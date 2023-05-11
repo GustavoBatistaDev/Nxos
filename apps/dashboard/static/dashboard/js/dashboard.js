@@ -33,14 +33,7 @@ function moveActiveTab() {
   active_tab.style.top = `${topPosition}px`;
 }
 
-function changeLink() {
-  sidebar_links.forEach((sideLink) => sideLink.classList.remove("active"));
-  this.classList.add("active");
 
-  activeIndex = this.dataset.active;
-
-  moveActiveTab();
-}
 
 sidebar_links.forEach((link) => link.addEventListener("click", changeLink));
 
@@ -58,3 +51,4 @@ function showTooltip() {
 tooltip_elements.forEach((elem) => {
   elem.addEventListener("mouseover", showTooltip);
 });
+
