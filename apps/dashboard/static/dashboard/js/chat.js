@@ -1,5 +1,5 @@
 // Chave de API do OpenAI
-const apiKey = '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'
+const apiKey = ''
 $("#messageArea").on("submit", function(e){
     e.preventDefault();
 
