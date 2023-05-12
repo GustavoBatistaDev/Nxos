@@ -31,7 +31,7 @@
                         <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input  placeholder="Enter your fullname..."  name="fullname" value="{{request.user.fullname}}" type="text" class="form-control">
+                        <input  placeholder="Enter your fullname..."  name="fullname" value="{% if request.user.fullname %}{{request.user.fullname}}{% endif %}" type="text" class="form-control">
                     </div>
                     
                 </div>
@@ -49,7 +49,7 @@
                         <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input  placeholder="exemplo@gmail.com"  name="email" type="text" value="{{request.user.email}}" class="form-control">
+                        <input  placeholder="exemplo@gmail.com"  name="email" type="text" value="{% if request.user.email %}{{request.user.email}}{% endif %}" class="form-control">
                     </div>
                 </div>
               
@@ -59,7 +59,7 @@
                         <h6 class="mb-0">Mobile</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input id="mobile"  placeholder="(73) 00000-0000"  name="mobile" value="{{request.user.mobile}}" type="text" class="form-control w-100" >
+                        <input id="mobile"  placeholder="(73) 00000-0000"  name="mobile" value="{% if request.user.mobile %}{{request.user.mobile}}{% endif %}" type="text" class="form-control w-100" >
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -67,7 +67,7 @@
                         <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input placeholder="Rua, Bairro - Cidade, UF CEP-123" name="address" value="{{request.user.address}}" type="text" class="form-control">
+                        <input placeholder="Rua, Bairro - Cidade, UF CEP-123" name="address" value="{% if request.user.address %}{{request.user.address}}{% endif %}" type="text" class="form-control">
                     </div>
                 </div>
                 
@@ -85,8 +85,3 @@
 </div>
         
 {% endblock %}
-  
-  </body>
-  
-  </html>
-

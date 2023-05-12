@@ -12,7 +12,7 @@ $("#messageArea").on("submit", function(e){
 					
 					$("#message-input").val("");
                     var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + 
-                    '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';
+                    '</span></div><div class="img_cont_msg"><img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" class="rounded-circle user_img_msg"></div></div>';
                     $("#messageFormeight").append(userHtml);
 					
                     fetch("https://api.openai.com/v1/completions",{
@@ -32,8 +32,27 @@ $("#messageArea").on("submit", function(e){
                     .then((response) => response.json())
                     .then((response) => {
                        
-                        var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + response.choices[0]['text'] + '<span class="msg_time">' + str_time + '</span></div></div>';
+                        var botHtml = '<div id="" class="d-flex justify-content-start mb-4"> <div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer"><i class="fa-solid fa-copy"></i>' + response.choices[0]['text'] + e + '</div></div>';
 						$("#messageFormeight").append($.parseHTML(botHtml));
+
+                        $(document).ready(function() {
+                            // Adicionar um ID dinâmico a cada div
+                            $(".my-div").each(function(index) {
+                              $(this).attr("id", "div-" + (index + 1));
+                            });
+                            
+                            // Adicionar um manipulador de evento de clique em cada ícone de cópia
+                            $(".fa-copy").click(function() {
+                              // Obter o conteúdo da div correspondente
+                              var content = $(this).parent().text().trim();
+                              
+                              // Copiar o conteúdo para a área de transferência
+                              navigator.clipboard.writeText(content);
+                              
+                              // Exibir uma mensagem informando que o conteúdo foi copiado
+                             
+                            });
+                          });
                       
                     })
                     .catch((e) => {

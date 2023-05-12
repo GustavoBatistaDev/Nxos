@@ -44,11 +44,9 @@ class RegisterView(View):
                                         password=hash_password,
                                         is_active=False
                                     )
-                                
-                               
+
                                 messages.add_message(request, messages.ERROR, 'Registered! check your email.')
                                 return ValidatorMixin.redirect_client('authentication:login') 
-
                             except Exception:
                                 messages.add_message(request, messages.ERROR, 'Something went wrong! Try again.')
                                 return ValidatorMixin.redirect_client('authentication:register')
@@ -77,9 +75,8 @@ class LoginView(View):
         if user is not None:
             login(request, user)
             return redirect('dashboard:dashboard')
-        else:
-            messages.add_message(request, messages.ERROR, 'Invalid email or password!')
-            return render(request, 'authentication/login.html', context={'email':email})
+        messages.add_message(request, messages.ERROR, 'Invalid email or password!')
+        return render(request, 'authentication/login.html', context={'email':email})
       
 
 class LogoutView(View):
@@ -99,7 +96,7 @@ class ActiveAccountView(View):
             auth_login(request, user)
             messages.add_message(request, messages.SUCCESS, 'Your account has been saved successfully' ) 
             return redirect(reverse('authentication:login'))
-        else:
-            messages.add_message(request, messages.ERROR, 'The url accessed is not valid' ) 
-            return redirect(reverse('authentication:register'))
+       
+        messages.add_message(request, messages.ERROR, 'The url accessed is not valid' ) 
+        return redirect(reverse('authentication:register'))
         

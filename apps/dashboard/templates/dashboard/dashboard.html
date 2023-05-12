@@ -2,9 +2,9 @@
 
 {% block 'main'%}
 
-     {% if request.user.first_name%}
+     {% if request.user.first_name %}
       <h1 class="text-white">
-        Hello, {{request.user.username}} I hope we can make your routine as a lawyer easier! Enjoy.
+        Hello, {{request.user.first_name}} I hope we can make your routine as a lawyer easier! Enjoy.
       </h1>
     {% else %}
     <h1 class="text-white">
@@ -62,7 +62,5 @@
    
   {% endblock %}
   
-  </body>
-  
-  </html>
+
 

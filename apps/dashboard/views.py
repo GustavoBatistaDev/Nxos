@@ -12,6 +12,7 @@ from django.views.generic import TemplateView
 from authentication.mixins import ValidatorMixin
 from authentication.models import UserCustom
 from .mixins import ValidatorProfileMixin
+from .models import Projects
 
 
 @method_decorator(login_required, name='dispatch')
@@ -31,7 +32,6 @@ class ProfileView(View):
         if user.exists():
             messages.add_message(request, messages.ERROR, 'Try another email.')
             return redirect('dashboard:profile')
-        
         fullname_is_valid = ValidatorProfileMixin.validate_fullname(request)
         if fullname_is_valid:
             email_is_valid = ValidatorProfileMixin.validate_email(request) 
@@ -50,7 +50,6 @@ class ProfileView(View):
                         return redirect('dashboard:profile')
                     messages.add_message(request, messages.ERROR, 'Address is invalid')
                     return redirect('dashboard:profile')
-                    
                 messages.add_message(request, messages.ERROR, 'Mobile is invalid')
                 return redirect('dashboard:profile')
             messages.add_message(request, messages.ERROR, 'Email is invalid')
@@ -59,3 +58,23 @@ class ProfileView(View):
         return redirect('dashboard:profile')
 
         
+@method_decorator(login_required, name='dispatch')
+class ProjectView(View):
+    def get(self, request, *args, **kwargs):
+        
+        projects = Projects.objects.filter(user=request.user.id)
+        return render(request, 'dashboard/project.html', context={'projects':projects})
+
+    
+    def post(self, request, *args, **kwargs):
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        user = UserCustom.objects.get(id=request.user.id)
+        new_project = Projects.objects.create(
+            user=user,
+            title=title,
+            body=body
+
+        )
+        messages.add_message(request, messages.SUCCESS, 'Project created')
+        return redirect('dashboard:projects')
