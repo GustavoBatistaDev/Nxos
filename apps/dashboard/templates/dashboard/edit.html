@@ -1,0 +1,44 @@
+{% extends 'dashboard/base_dashboard.html'%}
+
+{% block 'main'%}
+ 
+    <form action="" method="POST">{% csrf_token %}
+        <div class="modal-content text-white">
+    
+            <!-- Cabeçalho do Modal -->
+            <div  class="modal-header">
+              <h4 class="modal-title">
+                Edit {{project.title}}
+              </h4>
+              
+            </div>
+            
+            <!-- Corpo do Modal -->
+            <div id="header-body" class="modal-body">
+              <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input value="{{project.title}}" type="text" name="title" class="form-control" id="titulo">
+              </div>
+              <div class="form-group " >
+                <label for="texto">Texto:</label>
+                <textarea  name="body" rows="20" cols="10" class="form-control" id="texto">{{project.body}}</textarea>
+              </div>
+            </div>
+            
+            <!-- Rodapé do Modal -->
+            <div class="modal-footer">
+             <form action="" method="POST">{% csrf_token %}
+              <button type="submit" class="button-new-project p-2">Salvar</button>
+             </form>
+            </div>
+            
+          </div>
+    </form>
+          
+
+
+   
+  {% endblock %}
+  
+
+

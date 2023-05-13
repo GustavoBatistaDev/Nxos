@@ -44,7 +44,6 @@ class RegisterView(View):
                                         password=hash_password,
                                         is_active=False
                                     )
-
                                 messages.add_message(request, messages.ERROR, 'Registered! check your email.')
                                 return ValidatorMixin.redirect_client('authentication:login') 
                             except Exception:

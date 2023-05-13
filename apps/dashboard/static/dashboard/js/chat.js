@@ -1,5 +1,5 @@
 // Chave de API do OpenAI
-const apiKey = ''
+const apiKey = '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'
 $("#messageArea").on("submit", function(e){
     e.preventDefault();
 
@@ -32,7 +32,7 @@ $("#messageArea").on("submit", function(e){
                     .then((response) => response.json())
                     .then((response) => {
                        
-                        var botHtml = '<div id="" class="d-flex justify-content-start mb-4"> <div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer"><i class="fa-solid fa-copy"></i>' + response.choices[0]['text'] + e + '</div></div>';
+                        var botHtml = '<div id="" class="d-flex justify-content-start mb-4"> <div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer"><i class="fa-solid fa-copy fa-1x"></i>' + response.choices[0]['text']   + '</div></div>';
 						$("#messageFormeight").append($.parseHTML(botHtml));
 
                         $(document).ready(function() {
@@ -50,6 +50,7 @@ $("#messageArea").on("submit", function(e){
                               navigator.clipboard.writeText(content);
                               
                               // Exibir uma mensagem informando que o conteúdo foi copiado
+                              alert('Texto copiado com sucesso!');
                              
                             });
                           });

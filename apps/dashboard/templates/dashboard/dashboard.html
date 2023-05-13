@@ -3,13 +3,14 @@
 {% block 'main'%}
 
      {% if request.user.first_name %}
-      <h1 class="text-white">
-        Hello, {{request.user.first_name}} I hope we can make your routine as a lawyer easier! Enjoy.
-      </h1>
+      <h2 class="text-white">
+        Hello, {{request.user.first_name}} the chatbot will help in their jobs. Copy and paste into your projects.
+      </h2>
     {% else %}
     <h1 class="text-white">
       Hello, I hope we can make your routine as a lawyer easier! Enjoy.
     </h1>
+    
      {% endif %}
 
     

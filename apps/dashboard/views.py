@@ -17,15 +17,16 @@ from .models import Projects
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request: HttpRequest, *args, **kwargs):
         return render(request, 'dashboard/dashboard.html')
 
 
 @method_decorator(login_required, name='dispatch')
 class ProfileView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request: HttpRequest, *args, **kwargs):
         return render(request, 'dashboard/profile.html')
     
+
     def post(self, request: HttpRequest,  *args, **kwargs) -> HttpResponse:
         data = ValidatorProfileMixin.get_data(request)
         user = UserCustom.objects.filter(email=data['email']).exclude(id=request.user.id)
@@ -60,21 +61,55 @@ class ProfileView(View):
         
 @method_decorator(login_required, name='dispatch')
 class ProjectView(View):
-    def get(self, request, *args, **kwargs):
-        
-        projects = Projects.objects.filter(user=request.user.id)
+    def get(self, request: HttpRequest, *args, **kwargs):
+        projects = Projects.objects.filter(user=request.user.id).order_by('-id')
         return render(request, 'dashboard/project.html', context={'projects':projects})
 
     
-    def post(self, request, *args, **kwargs):
-        title = request.POST.get('title')
-        body = request.POST.get('body')
+    def post(self, request: HttpRequest, *args, **kwargs):
+        title = request.POST.get('title' )
+        body = request.POST.get('body' )
+  
+       
+        if not body or not title:
+            messages.add_message(request, messages.SUCCESS, 'Title and text fields cannot be null!')
+            return redirect('dashboard:projects')
         user = UserCustom.objects.get(id=request.user.id)
-        new_project = Projects.objects.create(
+        _ = Projects.objects.create(
             user=user,
             title=title,
             body=body
-
         )
         messages.add_message(request, messages.SUCCESS, 'Project created')
         return redirect('dashboard:projects')
+    
+
+@method_decorator(login_required, name='dispatch')
+class ProjectEditView(View):
+    def get(self, request: HttpRequest, id: int):
+        project = Projects.objects.filter(id=id).first()
+        return render(request, 'dashboard/edit.html', context={'project':project})
+
+
+    def post(self, request: HttpRequest, id: int):
+        title = request.POST.get('title' )
+        body = request.POST.get('body')
+        if not body or not title:
+            messages.add_message(request, messages.SUCCESS, 'Title and text fields cannot be null!')
+            return redirect('dashboard:projects')
+        project = Projects.objects.filter(id=id).first()
+        project.title = title
+        project.body = body
+        project.save()
+        messages.add_message(request, messages.SUCCESS, 'Project edited')
+        return redirect('dashboard:projects')
+    
+
+@method_decorator(login_required, name='dispatch')
+class ProjectDeleteView(View):
+    def get(self, request: HttpRequest, id: int):
+        project = Projects.objects.filter(id=id).first()
+        project.delete()
+        messages.add_message(request, messages.SUCCESS, 'Project deleted')
+        return redirect('dashboard:projects')
+

@@ -2,8 +2,8 @@
 
 {% block 'main'%}
 <div class="container">
-    <div class="row">
-        <div class="col-sm-3">
+    <div class="row mb-2">
+        <div class="col-sm-3 mr-auto">
             <button type="button" data-toggle="modal" data-target="#myModal" class="p-2 button-new-project">Project<span> <i class="fa-solid fa-plus "></i></span></button>
         </div>
     </div>    
@@ -12,15 +12,29 @@
 {% if not request.user.projects_set.exists%}
     <h1 class="mx-auto text-white"> You don't have any projects yet. </h1>
 {% else %}
-    {% for i in projects%}
-        {{i}}
-    {% endfor%}
+
+  <div class="card container rounded-3">
+     <div class="row pt-3 text-white p-2 justify-content-center">
+      {% for i in projects%}
+      <div class="  cards col-md-2 p-4 m-1 ">
+        <h5 class="">{{i}}</h5>
+         <div class="my-2">
+          <a class="mt-5 mx-auto" href="{% url 'dashboard:edit' i.id%}">Edit</a>
+          <a class="mt-5 text-danger" href="{% url 'dashboard:delete' i.id%}">Delete</a>
+         </div>
+      </div>
+      {% endfor%}
+     </div>   
+  </div>
+
+
+   
 {% endif %}
 
 
 <!-- Modal -->
 <div class="modal" id="myModal">
-  <div class="modal-dialog modal-lg" >
+  <div class="modal-dialog modal-lg text-white" >
     <form action="{% url 'dashboard:projects' %}" method="POST">{% csrf_token %}
         <div class="modal-content">
     
@@ -60,7 +74,7 @@
     </form>
   </div>
 </div>
-       
+
 
    
 {% endblock %}
