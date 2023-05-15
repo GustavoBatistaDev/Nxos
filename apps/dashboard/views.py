@@ -13,12 +13,13 @@ from authentication.mixins import ValidatorMixin
 from authentication.models import UserCustom
 from .mixins import ValidatorProfileMixin
 from .models import Projects
+from django.db.models import Q
 
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
     def get(self, request: HttpRequest, *args, **kwargs):
-        return render(request, 'dashboard/dashboard.html')
+        return render(request, 'dashboard/dashboard.html', context={'request': request})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -62,18 +63,24 @@ class ProfileView(View):
 @method_decorator(login_required, name='dispatch')
 class ProjectView(View):
     def get(self, request: HttpRequest, *args, **kwargs):
-        projects = Projects.objects.filter(user=request.user.id).order_by('-id')
+        search_term = request.GET.get('search') if request.GET.get('search') is not None else ''
+        if search_term.strip() == '':
+            projects = Projects.objects.filter(user=request.user.id).order_by('-id')
+        else:
+            search_term = search_term.strip()
+            query = Q(title__icontains=search_term) | Q(body__icontains=search_term) 
+            projects = Projects.objects.filter(user=request.user.id).filter(query).order_by('-id')
         return render(request, 'dashboard/project.html', context={'projects':projects})
 
     
     def post(self, request: HttpRequest, *args, **kwargs):
         title = request.POST.get('title' )
         body = request.POST.get('body' )
-  
-       
-        if not body or not title:
+        if not body.strip() or not title.strip():
             messages.add_message(request, messages.SUCCESS, 'Title and text fields cannot be null!')
             return redirect('dashboard:projects')
+        body = body.strip()     
+        title = title.strip()
         user = UserCustom.objects.get(id=request.user.id)
         _ = Projects.objects.create(
             user=user,
@@ -94,9 +101,11 @@ class ProjectEditView(View):
     def post(self, request: HttpRequest, id: int):
         title = request.POST.get('title' )
         body = request.POST.get('body')
-        if not body or not title:
+        if not body.strip() or not title.strip():
             messages.add_message(request, messages.SUCCESS, 'Title and text fields cannot be null!')
             return redirect('dashboard:projects')
+        body = body.strip()     
+        title = title.strip()
         project = Projects.objects.filter(id=id).first()
         project.title = title
         project.body = body

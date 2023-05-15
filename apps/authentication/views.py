@@ -37,7 +37,7 @@ class RegisterView(View):
                         if not user_exists.exists():
                             try:
                                 hash_password = urlsafe_base64_encode(force_bytes(data['password']))
-                                new_user = UserCustom.objects.create(
+                                _ = UserCustom.objects.create(
                                         first_name=data['first_name'],
                                         last_name=data['last_name'],
                                         email=data['email'],

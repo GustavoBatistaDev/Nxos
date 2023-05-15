@@ -37,10 +37,12 @@
         <h3 class="hide">{{request.user.first_name}}</h3>
       </div>
   
+    <form action="{% url 'dashboard:projects' %}" method="GET">
       <div class="search">
         <i class='bx bx-search'></i>
-        <input type="text" class="hide" placeholder="Quick Search ...">
+        <input value="{{request.GET.search}}" name="search" type="text" class="hide" placeholder="Quick Search ...">
       </div>
+    </form>
   
       <div class="sidebar-links">
         <ul>
@@ -139,9 +141,6 @@
 
               
 
-
-    
-          
    
 
    
@@ -150,8 +149,85 @@
   <script src="{% static 'dashboard/js/chat.js'%}"></script>
   <script src="{% static 'dashboard/js/dashboard.js'%}"></script>
   <script src="{% static 'dashboard/js/profile.js'%}"></script>
+  <script>
+    let userPhoto = document.querySelector('#user-photo')
+    console.log(userPhoto)
+  </script>
 
   
+<script>
+  // Chave de API do OpenAI
+const apiKey = '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'
+$("#messageArea").on("submit", function(e){
+    e.preventDefault();
+
+    const date = new Date();
+					const hour = date.getHours();
+					const minute = date.getMinutes();
+					const str_time = hour+":"+minute;
+					var rawText = $("#message-input").val();
+                    var rawTextInput = $("#message-input")
+					
+					$("#message-input").val("");
+    
+                    var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + 
+                    '</span></div><div class="img_cont_msg"><img id="picture_user" src="" class="rounded-circle user_img_msg"></div></div>';
+                    
+                    $("#messageFormeight").append(userHtml);
+					
+                    fetch("https://api.openai.com/v1/completions",{
+                        method: 'POST',
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${apiKey}`,
+                        },
+                        body: JSON.stringify({
+                            model: "text-davinci-003",
+                            prompt: rawText,
+                            max_tokens: 2048, // tamanho da resposta
+                            temperature: 0.5 // criatividade na resposta
+                        })
+                    })
+                    .then((response) => response.json())
+                    .then((response) => {
+                       
+                        var botHtml = '<div id="" class="d-flex justify-content-start mb-4"> <div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer"><i class="fa-solid fa-copy fa-1x"></i>' + response.choices[0]['text']   + '</div></div>';
+						$("#messageFormeight").append($.parseHTML(botHtml));
+
+                        $(document).ready(function() {
+                            // Adicionar um ID dinâmico a cada div
+                            $(".my-div").each(function(index) {
+                              $(this).attr("id", "div-" + (index + 1));
+                            });
+                            
+                            // Adicionar um manipulador de evento de clique em cada ícone de cópia
+                            $(".fa-copy").click(function() {
+                              // Obter o conteúdo da div correspondente
+                              var content = $(this).parent().text().trim();
+                              
+                              // Copiar o conteúdo para a área de transferência
+                              navigator.clipboard.writeText(content);
+                              
+                              // Exibir uma mensagem informando que o conteúdo foi copiado
+                              alert('Texto copiado com sucesso!');
+                             
+                            });
+                          });
+                      
+                    })
+                    .catch((e) => {
+                        console.log(`Error -> ${e}`)
+                        
+                    })
+                    .finally(() => {
+                       
+                        rawTextInput.disabled = false
+                        rawTextInput.value = ''
+                    })
+                   
+					});		
+</script>     
   
   </body>
   
