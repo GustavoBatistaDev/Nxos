@@ -34,7 +34,7 @@ SECRET_KEY = config('SECRETY_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=True)
 
-ALLOWED_HOSTS = ['gustav.top', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['gustav.top', '127.0.0.1']
 
 
 # Application definition
@@ -161,11 +161,9 @@ AUTHENTICATION_BACKENDS = ('authentication.backends.CustomBackend',)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (
-     Path(BASE_DIR, 'static'),
-    Path(BASE_DIR, 'templates/static'),
 
-)
+STATIC_ROOT = Path(BASE_DIR, 'static')
+
 MEDIA_ROOT = Path(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
