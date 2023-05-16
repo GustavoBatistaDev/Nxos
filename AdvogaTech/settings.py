@@ -14,6 +14,8 @@ from pathlib import Path
 import os 
 import sys
 from decouple import config
+import os
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +24,7 @@ PRJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PRJECT_ROOT, '../apps'))
 
 DOMAIN = config('DOMAIN')
-
+APIKEY = os.getenv('APIKEY')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -32,7 +34,7 @@ SECRET_KEY = config('SECRETY_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gustav.top', '127.0.0.1:8000']
 
 
 # Application definition
@@ -174,11 +176,11 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #email  
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'peeeepslow@gmail.com'
-EMAIL_HOST_PASSWORD = 'qpzbbfsrhhkxtcux'
+EMAIL_HOST_USER = 'gustavobatistadev@gmail.com'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 

@@ -22,7 +22,9 @@ class RegisterView(View):
     
 
     def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        data_post = request.POST.dict()
         validate_data = ValidatorMixin.validate_data_is_empty(request)
+
         if validate_data:
             validate_password = ValidatorMixin.validate_password(validate_data)
             if validate_password:
@@ -48,17 +50,17 @@ class RegisterView(View):
                                 return ValidatorMixin.redirect_client('authentication:login') 
                             except Exception:
                                 messages.add_message(request, messages.ERROR, 'Something went wrong! Try again.')
-                                return ValidatorMixin.redirect_client('authentication:register')
+                                return render(request, 'authentication/register.html', context={'data':data_post})
                         messages.add_message(request, messages.ERROR, 'Use another email.')
-                        return ValidatorMixin.redirect_client('authentication:register')
+                        return render(request, 'authentication/register.html', context={'data':data_post})
                     messages.add_message(request, messages.ERROR, 'Invalid email')
-                    return ValidatorMixin.redirect_client('authentication:register')
+                    return render(request, 'authentication/register.html', context={'data':data_post})
                messages.add_message(request, messages.ERROR, 'Check the name and last name fields! ')
-               return ValidatorMixin.redirect_client('authentication:register')
-            messages.add_message(request, messages.ERROR, 'Invalid password. ')
-            return ValidatorMixin.redirect_client('authentication:register')
+               return render(request, 'authentication/register.html', context={'data':data_post})
+            messages.add_message(request, messages.ERROR, 'Invalid password.') 
+            return render(request, 'authentication/register.html', context={'data':data_post})
         messages.add_message(request, messages.ERROR, 'No field can be null!')
-        return ValidatorMixin.redirect_client('authentication:register')
+        return render(request, 'authentication/register.html', context={'data':data_post})
 
 
 class LoginView(View):

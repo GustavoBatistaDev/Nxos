@@ -61,11 +61,11 @@
                             <div class="row mx-auto">
                                 <div class="col-md-6 px-2 ">
                                     <label for="firstname">First name</label>
-                                    <input id="firstname" name="first_name"  class=" pb-2 register-input form-control pb-2 input-names " placeholder="First name" type="text">
+                                    <input value="{{data.first_name}}" id="firstname" name="first_name"  class=" pb-2 register-input form-control pb-2 input-names " placeholder="First name" type="text">
                                 </div>
                                 <div class="col-md-6 px-2 ">
                                     <label for="lastname">Last name</label>
-                                    <input name="last_name"    class="register-input form-control pb-2 input-names " placeholder="Last name" id="lastname" type="text">
+                                    <input value="{{data.last_name}}" name="last_name"    class="register-input form-control pb-2 input-names " placeholder="Last name" id="lastname" type="text">
                                 </div>
                             </div>
                         </div>
@@ -73,11 +73,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="email-address">Email address</label>
-                                    <input placeholder="Email address" name="email_address" id="email-address" class="form-control pb-2 email-address"  type="email" >
+                                    <input value="{{data.email_address}}" placeholder="Email address" name="email_address" id="email-address" class="form-control pb-2 email-address"  type="email" >
                                 </div>
                                 <div class="col-md-12">
                                     <label for="password">Password</label>
-                                    <input name="password" placeholder="Enter your password" id="password" class="form-control pb-2 input-passwords"  type="password" >
+                                    <input  name="password" placeholder="Enter your password" id="password" class="form-control pb-2 input-passwords"  type="password" >
                                         <p  class="help-text float-right m-0">Password must have uppercase and lowercase letters</p>
                                 </div>
                                 <div class="col-md-12">

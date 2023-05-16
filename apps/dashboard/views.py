@@ -70,6 +70,8 @@ class ProjectView(View):
             search_term = search_term.strip()
             query = Q(title__icontains=search_term) | Q(body__icontains=search_term) 
             projects = Projects.objects.filter(user=request.user.id).filter(query).order_by('-id')
+            if len(projects) == 0:
+                messages.add_message(request, messages.ERROR, 'No projects found.')
         return render(request, 'dashboard/project.html', context={'projects':projects})
 
     
