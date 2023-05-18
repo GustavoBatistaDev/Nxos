@@ -14,11 +14,16 @@ from authentication.models import UserCustom
 from .mixins import ValidatorProfileMixin
 from .models import Projects
 from django.db.models import Q
+from allauth.socialaccount.models import SocialAccount
+from allauth.account.models import EmailAddress
 
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
     def get(self, request: HttpRequest, *args, **kwargs):
+        user = UserCustom.objects.filter(id=request.user.id).first()
+        user.email = f'altereseuemail{user.id}@gmail.com'
+        user.save()
         return render(request, 'dashboard/dashboard.html', context={'request': request})
 
 

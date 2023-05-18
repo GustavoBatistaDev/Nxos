@@ -133,17 +133,7 @@
 
         {% endblock %}
 
-    </main>
-
-  
-   
-
-
-              
-
-   
-
-   
+    </main>   
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
   <script src="{% static 'dashboard/js/chat.js'%}"></script>
@@ -154,22 +144,18 @@
  
   <script>
     // Chave de API do OpenAI
-  const apiKey = "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"
+  const apiKey = "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"
   $("#messageArea").on("submit", function(e){
       e.preventDefault();
-  
       const date = new Date();
             const hour = date.getHours();
             const minute = date.getMinutes();
             const str_time = hour+":"+minute;
             var rawText = $("#message-input").val();
-                      var rawTextInput = $("#message-input")
-            
+            var rawTextInput = $("#message-input")
             $("#message-input").val("");
-      
                       var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + 
                       '</span></div><div class="img_cont_msg"><img id="picture_user" src="{% if request.user.photo %}{{request.user.photo.url}} {% else%} https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg{% endif %}" class="rounded-circle user_img_msg"></div></div>';
-                      
                       $("#messageFormeight").append(userHtml);
             
                       fetch("https://api.openai.com/v1/completions",{
@@ -188,30 +174,10 @@
                       })
                       .then((response) => response.json())
                       .then((response) => {
-                         
                           var botHtml = '<div id="" class="d-flex justify-content-start mb-4"> <div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer"><i class="fa-solid fa-copy fa-1x"></i>' + response.choices[0]['text']   + '</div></div>';
               $("#messageFormeight").append($.parseHTML(botHtml));
-  
-                          $(document).ready(function() {
-                              // Adicionar um ID dinâmico a cada div
-                              $(".my-div").each(function(index) {
-                                $(this).attr("id", "div-" + (index + 1));
-                              });
-                              
-                              // Adicionar um manipulador de evento de clique em cada ícone de cópia
-                              $(".fa-copy").click(function() {
-                                // Obter o conteúdo da div correspondente
-                                var content = $(this).parent().text().trim();
-                                
-                                // Copiar o conteúdo para a área de transferência
-                                navigator.clipboard.writeText(content);
-                                
-                                // Exibir uma mensagem informando que o conteúdo foi copiado
-                                alert('Texto copiado com sucesso!');
-                               
-                              });
-                            });
-                        
+          
+
                       })
                       .catch((e) => {
                           console.log(`Error -> ${e}`)
@@ -225,11 +191,6 @@
                      
             });		
   </script>     
-    
- 
-
-  
-
   </body>
   
   </html>

@@ -120,6 +120,16 @@ AUTHENTICATION_BACKENDS = [
     
 ]
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '509948241599-8su9b38gusu92ri7v5nscahgis4k8vrq.apps.googleusercontent.com' ,
+            'secret': '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',
+        }
+    }
+}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
